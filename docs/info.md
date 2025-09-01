@@ -9,12 +9,29 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+The Implies Gate in Discrete Mathematics / Digital Design can be described with this truth table:
+
+| P | Q | P => Q |
+|----------------|
+| T | T |   T    |
+| T | F |   F    |
+| F | T |   T    |
+| F | F |   T    |
+
+where P and Q are prepositional binary-like variables.
+
+This implies operation is done to each bit of "A" and "B", where "A" and "B" both represent 4 bit vectors, 
+and returned as a resulting 4 bit "A => B" vector.
 
 ## How to test
 
 Explain how to use your project
 
+Hook up the first four strictly input IO pins to form your "A",
+then hook up the next four strictly input IO pins to form your "B"
+
+The strictly 4 output pins will be your resulting "A => B".
+
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+None external hardware is necessary
