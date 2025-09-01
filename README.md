@@ -1,41 +1,42 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+## NOTE:
 
-# Tiny Tapeout Verilog Project Template
+This is a forked repository, for more information with TinyTapeout (the main people I'm using from)
+Please take a look at the link:
+https://tinytapeout.com
 
-- [Read the documentation for project](docs/info.md)
+## Project Synopsis
 
-## What is Tiny Tapeout?
+Firstly, if you are unaware of who TinyTapeout are, I personally recommend taking them a look.
+They allow ordinary people to design and create their own personal ASIC chips at an affordable price.
+If you're even remotely fascinated with what any of this means, I cannot recommend them enough.
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
+Anyways, here's what my project does.
 
-To learn more and get started, visit https://tinytapeout.com.
+My chip design takes all the 8 bits of the strictly input pins, and makes 2-4 bit values to then do
+an "implies" operation on. For the sake of convenience, we'll call the first 4 bits "A" and the 
+second half of the bits "B".
 
-## Set up your Verilog project
+The implies gate, no different than something like XOR or NAND, takes in two values and returns
+a binary value. The implies gate always return True, except for when "A" is True and "B" is False.
 
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
+After "A" and "B" are found:
+- Each bit of "A" is implied with each bit of "B", and the result is returned in the corresponding index.
 
-The GitHub action will automatically build the ASIC files using [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/).
+EX:
 
-## Enable GitHub actions to build the results page
+A = 1010, B = 1101
 
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+This gets turned into,
+∀i∈{0,1,2,3}, ui_out[i] := A[i] => B[i];; 
 
-## Resources
+or in other words, each bit of A gets implies with B and their result is saved into the 
+strictly output stream.
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
+This does mean that the last 4 bits of the output stream are unused and will always be 0!
+Be sure that this is considered when using this chip.
 
-## What next?
+For more details, look into the info.md in the docs directory of this template.
 
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
+I hope I inspire you! Good luck out there!
+
+Bennett Miller (c) 2025
