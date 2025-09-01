@@ -37,6 +37,6 @@ Be sure that this is considered when using this chip.
 
 For more details, look into the info.md in the docs directory of this template.
 
-I hope I inspire you! Good luck out there!
+I hope I inspired you! Good luck out there!
 
 Bennett Miller (c) 2025
